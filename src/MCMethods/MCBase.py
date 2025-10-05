@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import numpy as np
+from numpy import random
 
 
 class MCBase(ABC):
@@ -10,8 +12,17 @@ class MCBase(ABC):
     of simulations.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, S0, r, sigma, T, n_steps, payoff, seed=None) -> None:
         """Initialize the Monte Carlo method with default parameters."""
+        self.S0 = S0
+        self.r = r
+        self.sigma = sigma
+        self.T = T
+        self.n_steps = n_steps
+        self.payoff = payoff
+        self.dt = T / n_steps
+        if seed:
+            self.rng = np.random.default_rng(seed)
         self.simulation_results = []
 
     @abstractmethod
@@ -43,5 +54,17 @@ class MCBase(ABC):
 
         Raises:
             NotImplementedError: If not implemented by subclass
+        """
+        raise NotImplementedError("Subclasses must implement this method")
+
+    @abstractmethod
+    def get_average_result(self) -> float:
+        """
+        Calculate the average result from the simulation results.
+
+        This method computes the mean of the results obtained from the simulations.
+
+        Returns:
+            The average of the simulation results
         """
         raise NotImplementedError("Subclasses must implement this method")
