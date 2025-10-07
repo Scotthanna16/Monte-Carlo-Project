@@ -9,7 +9,7 @@ import os
 class DirectionNumbers:
     def __init__(
         self,
-        file_path: str = "src/data/direction_number.txt",
+        file_path: str = "Monte-Carlo-Project/src/data/direction_number.txt",
         max_bits: int = 30,
     ):
         self.max_bits = max_bits
@@ -61,9 +61,3 @@ class DirectionNumbers:
 
     def get_direction(self, j, k):
         return self.v[j][k] / 2**32
-
-
-dc = DirectionNumbers()
-print(dc.get_bit(2, 2))
-print(dc.get_direction(2, 2))
-print(dc.get_dim_direction(2))
